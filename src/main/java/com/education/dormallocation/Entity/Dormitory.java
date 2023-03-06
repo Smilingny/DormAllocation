@@ -10,6 +10,7 @@ public class Dormitory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Integer room_number;
+    private Integer lived_stu;
     private Integer building;
     @OneToMany(cascade = {CascadeType.ALL},mappedBy = "dormitory")
     private List<Student> studentList;
@@ -36,6 +37,14 @@ public class Dormitory {
 
     public void setBuilding(Integer building) {
         this.building = building;
+    }
+
+    public Integer getLived_stu() {
+        return lived_stu;
+    }
+
+    public void setLived_stu(Integer lived_stu) {
+        this.lived_stu = lived_stu;
     }
 
     public List<Student> getStudentList() {

@@ -22,6 +22,8 @@ public class Student {
     private Integer smoke;
     // 鼾声
     private Integer rhonchus;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private Dormitory dormitory;
 
     public Long getId() {
         return id;
@@ -101,5 +103,13 @@ public class Student {
 
     public void setRhonchus(Integer rhonchus) {
         this.rhonchus = rhonchus;
+    }
+
+    public Dormitory getDormitory() {
+        return dormitory;
+    }
+
+    public void setDormitory(Dormitory dormitory) {
+        this.dormitory = dormitory;
     }
 }
