@@ -22,7 +22,7 @@ public class Student {
     private Integer smoke;
     // 鼾声
     private Integer rhonchus;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     private Dormitory dormitory;
 
     public Long getId() {

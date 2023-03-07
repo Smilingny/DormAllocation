@@ -12,7 +12,7 @@ public class Dormitory {
     private Integer room_number;
     private Integer lived_stu;
     private Integer building;
-    @OneToMany(cascade = {CascadeType.ALL},mappedBy = "dormitory")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dormitory",fetch = FetchType.EAGER)
     private List<Student> studentList;
 
     public Long getId() {

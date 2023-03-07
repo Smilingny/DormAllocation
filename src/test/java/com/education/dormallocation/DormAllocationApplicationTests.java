@@ -1,20 +1,61 @@
 package com.education.dormallocation;
 
+import com.education.dormallocation.Dao.DormDao;
+import com.education.dormallocation.Dao.StudentDao;
+import com.education.dormallocation.Entity.Dormitory;
 import com.education.dormallocation.Entity.Student;
+import com.education.dormallocation.Utils.Encode;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.TestExecutionListeners;
+
+import javax.lang.model.util.SimpleTypeVisitor6;
+import java.util.List;
 
 @SpringBootTest
 class DormAllocationApplicationTests {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    StudentDao studentDao;
+    @Autowired
+    DormDao dormDao;
     @Test
     void contextLoads() {
-        Long aL = jdbcTemplate.queryForObject("select count(*) from student",Long.class);
-        System.out.println("test OracleConnect : {} 条"+aL);
+       Student student = new Student();
+        student.setName("小明");
+        student.setRest(4);
+        student.setQuietness(3);
+        student.setNeatness(3);
+        student.setSmoke(2);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        String password = passwordEncoder.encode("qwdgueyfvu");
+        student.setPassword(password);
+        student.setStu_id("20211060111");
+        studentDao.save(student);
     }
 
+    @Test
+    void Students_in_dorm(){
+        Dormitory dormitory = new Dormitory();
+        dormitory = dormDao.getDormitoriesById(1L);
+        List<Student> studentList = dormitory.getStudentList();
+        for (Student s : studentList) {
+            System.out.println(s.getName());
+        }
+    }
+    @Test
+    void compare(){
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        String str="sdfsefesfss";
+        String password = passwordEncoder.encode(str);
+        if (passwordEncoder.matches(str, password)) {
+            System.out.println("密码匹配");
+        } else {
+            System.out.println("密码不匹配");
+        }
+    }
 }
