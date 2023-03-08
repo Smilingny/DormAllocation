@@ -23,6 +23,8 @@ class DormAllocationApplicationTests {
     StudentDao studentDao;
     @Autowired
     DormDao dormDao;
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Test
     void contextLoads() {
        Student student = new Student();
@@ -55,10 +57,10 @@ class DormAllocationApplicationTests {
     }
     @Test
     void compare(){
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         String str="sdfsefesfss";
         String password = passwordEncoder.encode(str);
-        if (passwordEncoder.matches(str, password)) {
+        String s=passwordEncoder.encode(str);
+        if (password.equals(s)) {
             System.out.println("密码匹配");
         } else {
             System.out.println("密码不匹配");
