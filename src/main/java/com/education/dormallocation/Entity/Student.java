@@ -8,7 +8,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String stu_id;
+    private Long stu_id;
     private String password;
     private String name;
     private Boolean sex;
@@ -33,11 +33,11 @@ public class Student {
         this.id = id;
     }
 
-    public String getStu_id() {
+    public Long getStu_id() {
         return stu_id;
     }
 
-    public void setStu_id(String stu_id) {
+    public void setStu_id(Long stu_id) {
         this.stu_id = stu_id;
     }
 

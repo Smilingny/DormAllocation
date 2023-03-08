@@ -34,10 +34,16 @@ class DormAllocationApplicationTests {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         String password = passwordEncoder.encode("qwdgueyfvu");
         student.setPassword(password);
-        student.setStu_id("20211060111");
+        student.setStu_id(20211060111L);
         studentDao.save(student);
     }
 
+    @Test
+    void aaaa(){
+        Student student = new Student();
+        student = studentDao.findStudentByStu_id(2021100036L);
+        System.out.println(student.getName());
+    }
     @Test
     void Students_in_dorm(){
         Dormitory dormitory = new Dormitory();
@@ -56,6 +62,16 @@ class DormAllocationApplicationTests {
             System.out.println("密码匹配");
         } else {
             System.out.println("密码不匹配");
+        }
+    }
+
+    @Test
+    void encodePassword(){
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        String password;
+        for (Long i = 1L; i <= 3500L; i++) {
+            password=passwordEncoder.encode(studentDao.getPasswordById(i));
+            studentDao.updateStudentPasswordById(password,i);
         }
     }
 }
