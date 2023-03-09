@@ -28,4 +28,5 @@ public interface StudentDao extends JpaRepository<Student, Long> {
     @Modifying
     @Query("update Student s set s.password=?1 where s.id=?2")
     void updateStudentPasswordById(String password, Long id);
+
 }
