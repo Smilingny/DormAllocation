@@ -1,6 +1,7 @@
 package com.education.dormallocation.Dao;
 
 import com.education.dormallocation.Entity.Student;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,9 @@ public interface StudentDao extends JpaRepository<Student, Long> {
     @Query("select password from Student where id=?1")
     String getPasswordById(Long id);
 
+    @Query("select password from Student where stu_id=?1")
+    String getPasswordByStu_id(Long stu_id);
+
     List<Student> findAll();
 
     @Transactional
@@ -26,7 +30,11 @@ public interface StudentDao extends JpaRepository<Student, Long> {
 
     @Transactional
     @Modifying
-    @Query("update Student s set s.password=?1 where s.id=?2")
-    void updateStudentPasswordById(String password, Long id);
+    @Query("update Student s set s.password=?1 where s.stu_id=?2")
+    Integer updateStudentPasswordByStu_id(String password, Long stu_id);
 
+    @Transactional
+    @Modifying
+    @Query("update Student s set s.password=?1 where s.id=?2")
+    Integer updateStudentPasswordById(String password, Long id);
 }
